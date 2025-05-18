@@ -1,6 +1,208 @@
+:root {
+  --primary-color: rgb(32, 52, 120);
+  --secondary-color: rgb(135, 135, 135);
+  --tertiary-color: rgb(0, 159, 227);
+}
+
 /******* Change Box Model ***************/
 *,
 *:before,
 *:after {
+  /* font-size: 1.05em; */
   box-sizing: border-box;
 }
+
+h1 {
+  font-size: 2.5em;
+  color: var(--primary-color);
+}
+
+h2 {
+  font-size: 1.8em;
+}
+
+/* Layout */
+body {
+  margin: 10px 50px;
+  background-image: url("/images/site/checkerboard.jpg");
+  height: 97vh;
+}
+
+#app {
+  border-radius: 20px;
+  border: 3px solid var(--primary-color);
+  background-color: rgb(255, 255, 255);
+  padding: 10px;
+
+}
+
+main {
+  height: 100%;
+}
+
+/* Index */
+nav ul {
+  font-size: 1.3em;
+  width: 100%;
+  padding: 10px;
+  display: inline-flex;
+  justify-content: space-evenly;
+  list-style: none;
+  background-color: var(--primary-color);
+  color: white;
+}
+
+#top-header {
+  color: var(--primary-color);
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 5px;
+}
+
+#top-header a {
+  text-decoration: none;
+  color: var(--primary-color);
+}
+
+.siteName {
+  font-size: 2rem;
+}
+
+/* Hero */
+.hero {
+  background-image: url("/images/vehicles/delorean.jpg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  min-height: 30vh;
+  height: auto;
+  width: 80%;
+  text-align: center;
+  margin: auto;
+}
+
+.callout {
+  font-size: 1.6em;
+  background-color: rgb(255, 255, 255, 0.85);
+  width: 50%;
+  height: 100%;
+  margin: 5vh auto 0 0;
+  position: relative;
+  color: var(--tertiary-color);
+  text-align: left;
+  padding: 10px 0 0 30px;
+}
+
+.callout img {
+  width: auto;
+  height: 60px;
+}
+
+#gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 10px;
+
+}
+
+.services {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.services section {
+  width: 100%;
+  padding: 10px;
+}
+
+.gallery-item {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  text-align: center;
+  width: 100%;
+}
+
+.gallery-item div {
+  background-color: var(--tertiary-color);
+  width: 100%;
+  border: 1px solid var(--primary-color);
+}
+
+.gallery-item img {
+  height: 80%;
+}
+
+/* Mobile */
+@media screen and (max-width: 600px) {
+  h1 {
+    font-size: 2em;
+  }
+
+  .callout {
+    width: 60%;
+    height: auto;
+    font-size: 1em;
+  }
+
+  h2 {
+    font-size: 1.2em;
+  }
+
+  .hero {
+    background-image: url("/images/vehicles/delorean-tn.jpg");
+  }
+
+
+  nav ul {
+    font-size: 1em;
+    padding: 10px 0;
+    align-items: center;
+  }
+
+  .callout img {
+    height: 40px;
+  }
+
+  body {
+    margin: 10px 5px;
+    height: 100%;
+  }
+
+  #app {
+    width: 100%;
+    height: 100%;
+  }
+
+
+  .hero {
+    width: 100%;
+    height: auto;
+  }
+
+
+  .gallery-item img {
+    height: auto;
+    max-width: 100%;
+  }
+
+  .services {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+  }
+
+  .products-gallery {
+    grid-row: 2/3;
+  }
+
+  .reviews {
+    grid-row: 1/2;
+  }
+}
+
+/* nav ul {
+  padding: 0;
+} */
