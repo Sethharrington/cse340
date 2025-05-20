@@ -4,12 +4,32 @@
   --tertiary-color: rgb(0, 113, 170);
 }
 
+
 /******* Change Box Model ***************/
 *,
 *:before,
 *:after {
   /* font-size: 1.05em; */
   box-sizing: border-box;
+
+  font-family: "Open Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Ancizar Serif", serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
 }
 
 h1 {
@@ -170,6 +190,7 @@ nav ul {
   body {
     margin: 10px 5px;
     height: 100%;
+    background-image: none;
   }
 
   #app {
