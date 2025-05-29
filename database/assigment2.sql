@@ -54,5 +54,5 @@ WHERE c.classification_name = 'Sport';
 --  Update Images paths
 -----------------------------
 UPDATE public.inventory
-SET inv_image = REGEXP_REPLACE(inv_image, '[a-z]\/', '/vehicles/'),
-    inv_thumbnail = REGEXP_REPLACE(inv_thumbnail, '[a-z]\/', '/vehicles/');
+SET inv_image = REPLACE(inv_image, '/images/', '/images/vehicles/'),
+    inv_thumbnail = REPLACE(inv_thumbnail, '/images/', '/images/vehicles/');

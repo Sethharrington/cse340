@@ -1,0 +1,15 @@
+<!-- Check if title exists, to display it or redirect home -->
+<div class="error-page">
+  <div>
+    <% if (title) { %>
+    <h1><%= title %></h1>
+    <% } else { res.redirect('/') } %>
+    <!-- Displaying Error -->
+    <p><%- message %></p>
+  </div>
+  <img
+    class="img404"
+    src="images/404_page/yoda.webp"
+    alt="Yoda advising to go back home"
+  />
+</div>

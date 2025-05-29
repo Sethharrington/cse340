@@ -1,0 +1,6 @@
+<!-- Check if title exists, to display it or redirect home -->
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else { res.redirect('/') } %> <%# messages() %>
+<!-- Display cars cards -->
+<%- grid %>
