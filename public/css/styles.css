@@ -338,6 +338,10 @@ nav ul li a {
   }
 
 
+  .namePrice span {
+    font-size: 1.2em;
+  }
+
   .gallery-item img {
     height: auto;
     max-width: 100%;
@@ -359,9 +363,9 @@ nav ul li a {
   .details {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: auto 1fr;
     padding: 0;
-    gap: 0;
+    gap: 10px;
   }
 
   .details img {
@@ -374,12 +378,27 @@ nav ul li a {
     font-size: 1em;
     padding: 20px;
     margin: auto;
-    max-width: 90%;
   }
 
   /* Classification view */
   #inv-display {
     grid-template-columns: 1fr;
+  }
+
+  /*  Error views */
+  .error-page {
+    grid-template-columns: 1fr;
+    border-radius: 10px;
+    font-size: 1em;
+  }
+
+  .error-page p {
+    font-size: 1.2em;
+  }
+
+  .error-page h1 {
+    padding: 0;
+    font-size: 2em;
   }
 }
 
