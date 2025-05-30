@@ -35,7 +35,7 @@ invCont.buildByInventoryId = async function (req, res, next) {
 };
 invCont.internalError = async (req, res, next) => {
   next({
-    status: 505,
+    status: 500,
     message:
       "Internal Server Error: 'The path to the dark side is a path of no return.'",
   });

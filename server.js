@@ -53,7 +53,7 @@ app.use(async (err, req, res, next) => {
     message = err.message;
     image = "/images/errors/yoda.webp";
     className = "not-found";
-  } else if (err.status == 505) {
+  } else if (err.status == 500) {
     message =
       "Internal Server Error: 'The path to the dark side is a path of no return.'";
     image = "/images/errors/Darth-Vader.webp";
