@@ -1,5 +1,5 @@
 <!-- Check if title exists, to display it or redirect home -->
-<div class="error-page <%- className %>">
+<div class="error-page">
   <div>
     <% if (title) { %>
     <h1><%= title %></h1>
@@ -7,5 +7,9 @@
     <!-- Displaying Error -->
     <p><%- message %></p>
   </div>
-  <img class="img404" src="<%- image %>" alt="Yoda advising to go back home" />
+  <img
+    class="img500"
+    src="/images/errors/Darth-Vader.webp"
+    alt="Darth Vader, internal error"
+  />
 </div>

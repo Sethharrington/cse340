@@ -9,5 +9,7 @@ router.use("/css", express.static(__dirname + "public/css"));
 router.use("/js", express.static(__dirname + "public/js"));
 router.use("/images", express.static(__dirname + "public/images"));
 router.get("/type/:classificationId", invController.buildByClassificationId);
+router.get("/detail/:inventoryId", invController.buildByInventoryId);
+router.get("/internal-error", invController.internalError);
 
 module.exports = router;
