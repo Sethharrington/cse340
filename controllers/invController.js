@@ -33,6 +33,143 @@ invCont.buildByInventoryId = async function (req, res, next) {
     details,
   });
 };
+invCont.buildAddMenu = async function (req, res, next) {
+  let nav = await utilities.getNav();
+  res.render("./inventory/add-menu", {
+    title: "Vehicle Management",
+    nav,
+    errors: null,
+  });
+};
+invCont.buildAddClassification = async function (req, res, next) {
+  let nav = await utilities.getNav();
+  let classifications = await invModel.getClassifications();
+
+  if (classifications.length === 0) {
+    req.flash(
+      "notice",
+      "Sorry, there are no classifications available. Please add a classification first."
+    );
+    res.status(404).render("./inventory/add-classification", {
+      title: "New Classification",
+      nav,
+      errors: null,
+    });
+    return;
+  }
+  res.render("./inventory/add-classification", {
+    title: "New Classification",
+    nav,
+    errors: null,
+  });
+};
+invCont.buildAddCar = async function (req, res, next) {
+  let classifications = await invModel.getClassifications();
+  let nav = await utilities.getNav();
+  if (classifications.length === 0) {
+    res.status(404).render("./inventory/add-classification", {
+      title: "New Classification",
+      nav,
+      errors: null,
+    });
+  } else {
+    res.render("./inventory/add-car", {
+      title: "New Car",
+      nav,
+      classifications: classifications.rows,
+      errors: null,
+    });
+  }
+};
+
+/* ***************************
+ *  Add classification
+ * ************************** */
+invCont.addClassification = async function (req, res) {
+  const { classification_name } = req.body;
+  const addClassificationResult =
+    invModel.addClassification(classification_name);
+  let nav = await utilities.getNav();
+  if (addClassificationResult) {
+    req.flash(
+      "notice",
+      `The classification "${classification_name}" was added successfully.`
+    );
+    res.status(201).render("inventory/add-classification", {
+      title: "New Classification",
+      nav,
+      errors: null,
+    });
+  } else {
+    req.flash(
+      "notice",
+      `Sorry, there was an error adding the classification "${classification_name}".`
+    );
+    res.status(500).render("inventory/add-classification", {
+      title: "New Classification",
+      nav,
+      errors: null,
+    });
+  }
+};
+
+/* ***************************
+ *  Add car
+ * ************************** */
+
+invCont.addCar = async function (req, res) {
+  const {
+    inv_make,
+    inv_model,
+    inv_year,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_miles,
+    inv_color,
+    classification_id,
+  } = req.body;
+  const inv_car = {
+    inv_make,
+    inv_model,
+    inv_year,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_miles,
+    inv_color,
+    classification_id,
+  };
+  const addCarResult = await invModel.addCar(inv_car);
+  let nav = await utilities.getNav();
+  let classifications = await invModel.getClassifications();
+
+  if (addCarResult) {
+    req.flash(
+      "notice",
+      `The car "${inv_make} ${inv_model} (${inv_year})" was added successfully.`
+    );
+    res.status(201).render("./inventory/add-car", {
+      title: "New Car",
+      nav,
+      classifications: classifications.rows,
+      errors: null,
+    });
+  } else {
+    req.flash(
+      "notice",
+      `Sorry, there was an error adding the car "${inv_make} ${inv_model} (${inv_year})".`
+    );
+    res.status(500).render("./inventory/add-car", {
+      title: "New Car",
+      nav,
+      errors: null,
+    });
+  }
+};
+
 invCont.internalError = async (req, res, next) => {
   next({
     status: 500,

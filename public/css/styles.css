@@ -287,6 +287,116 @@ nav ul li a {
   align-self: center;
 }
 
+/* Registration and Login */
+input:required:invalid,
+input:focus:invalid {
+  background-image: url(/images/invalid.png);
+  background-position: right top;
+  background-repeat: no-repeat;
+}
+
+input:required:valid {
+  background-image: url(/images/valid.png);
+  background-position: right top;
+  background-repeat: no-repeat;
+}
+
+/* Add Links */
+.add-menu {
+  list-style: none;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: var(--primary-color);
+  color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.add-menu li {
+  background-color: #ffffff;
+  padding: 10px;
+  margin: 20px;
+  border-radius: 10px;
+}
+
+.add-menu li a {
+  text-decoration: none;
+  color: var(--primary-color);
+  font-size: 1.2em;
+}
+
+.add-menu li a:hover {
+  color: var(--secondary-color);
+  transition: 0.5s;
+}
+
+
+/* Forms */
+form {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 10px;
+  padding: 20px;
+  margin: auto;
+  width: 70%;
+  background-color: var(--primary-color);
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  color: #ffffff;
+  font-size: 1.2em;
+}
+
+form a,
+form button {
+  text-decoration: none;
+  border-radius: 10px;
+  box-shadow: 0 0 5px #ffffff;
+  background-color: #ffffff;
+  text-align: center;
+  padding: 10px;
+  grid-column: 1/3;
+  font-size: 1em;
+}
+
+form a:hover,
+form button:hover {
+  background-color: var(--tertiary-color);
+  color: #ffffff;
+  transition: 0.5s;
+}
+
+form input:valid,
+form select:valid,
+form textarea:valid {
+  border: 3px solid #75934E;
+}
+
+form input:invalid,
+form select:invalid,
+form textarea:invalid {
+  border: 3px solid #dc143c;
+}
+
+
+form input,
+form select,
+form textarea {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid var(--secondary-color);
+}
+
+form textarea {
+  resize: none;
+  height: 100px;
+}
+
+form p {
+  grid-column: 1/3;
+
+}
+
 /* Mobile */
 @media screen and (max-width: 600px) {
   h1 {
@@ -397,6 +507,12 @@ nav ul li a {
   .error-page h1 {
     padding: 0;
     font-size: 2em;
+  }
+
+  /* Mobile Form */
+  form {
+    grid-template-columns: 1fr;
+    width: 90%;
   }
 }
 

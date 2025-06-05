@@ -1,0 +1,15 @@
+<!-- Check if title exists, to display it or redirect home -->
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else { res.redirect('/') } %> <%- messages() %> <% if (errors) { %>
+<ul class="notice">
+  <% errors.array().forEach(error => { %>
+  <li><%= error.msg %></li>
+  <% }) %>
+</ul>
+<% } %>
+
+<ul class="add-menu">
+  <li><a href="./add-classification">Add New Classification</a></li>
+  <li><a href="./add-car">Add New Car</a></li>
+</ul>

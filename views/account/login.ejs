@@ -1,0 +1,52 @@
+<!-- Check if title exists, to display it or redirect home -->
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else { res.redirect('/') } %> <%- messages() %> <% if (errors) { %>
+<ul class="notice">
+  <% errors.array().forEach(error => { %>
+  <li><%= error.msg %></li>
+  <% }) %>
+</ul>
+<% } %>
+<form id="loginForm" action="/account/login" method="post">
+  <label for="account_email">Email: </label>
+  <input
+    type="email"
+    name="account_email"
+    placeholder="Email"
+    required
+    value="<%= locals.account_email %>"
+  />
+  <label for="account_password"> Password: </label>
+  <input
+    id="passwordInput"
+    type="password"
+    name="account_password"
+    placeholder="Password"
+    required
+    pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"
+  />
+  <span id="showPasswordSpan">Show password</span>
+  <p>
+    Passwords must be at least 12 characters and contain at least 1 number, 1
+    capital letter and 1 special character
+  </p>
+  <button type="submit">Login</button>
+  <a href="/account/register">Register</a>
+</form>
+<script>
+  // Show password toggle
+  const passwordInput = document.querySelector("#passwordInput");
+  const showPasswordSpan = document.querySelector("#showPasswordSpan");
+
+  showPasswordSpan.addEventListener("click", () => {
+    if (passwordInput.type === "password") {
+      passwordInput.type = "text";
+      showPasswordSpan.textContent = "Hide password";
+    } else {
+      passwordInput.type = "password";
+      showPasswordSpan.textContent = "Show password";
+    }
+  });
+</script>
+<!-- Add a link to the registration page -->

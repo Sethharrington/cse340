@@ -1,0 +1,26 @@
+<!-- Check if title exists, to display it or redirect home -->
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else { res.redirect('/') } %> <%- messages() %> <% if (errors) { %>
+<ul class="notice">
+  <% errors.array().forEach(error => { %>
+  <li><%= error.msg %></li>
+  <% }) %>
+</ul>
+<% } %>
+
+<form action="/inv/add-classification" method="post">
+  <label for="classification_name">Classification</label>
+  <input
+    type="text"
+    id="classification_name"
+    name="classification_name"
+    value="<%= locals.classification_name %>"
+    pattern="^[a-zA-Z0-9]+$"
+    placeholder="Classification Name"
+    required
+  />
+  <p>The classification can not contain any special character or space</p>
+
+  <button type="submit">Add</button>
+</form>
