@@ -14,8 +14,17 @@ router.get("/type/:classificationId", invController.buildByClassificationId);
 router.get("/detail/:inventoryId", invController.buildByInventoryId);
 router.get("/internal-error", invController.internalError);
 router.get("/add-classification", invController.buildAddClassification);
-router.get("/add-car", invController.buildAddCar);
+router.get("/add-car", utilities.handleErrors(invController.buildAddCar));
 router.get("", invController.buildAddMenu);
+router.get(
+  "/getInventory/:classification_id",
+  utilities.handleErrors(invController.getInventoryJSON)
+);
+router.get(
+  "/edit/:inventoryId",
+  invValidate.carRules(),
+  utilities.handleErrors(invController.editInventoryView)
+);
 router.post(
   "/add-classification",
   invValidate.classificationRules(),
@@ -27,6 +36,12 @@ router.post(
   invValidate.carRules(),
   invValidate.checkCarData,
   utilities.handleErrors(invController.addCar)
+);
+router.post(
+  "/update/",
+  invValidate.carRules(),
+  invValidate.checkUpdateData,
+  utilities.handleErrors(invController.editCar)
 );
 
 module.exports = router;

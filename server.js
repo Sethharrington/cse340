@@ -14,9 +14,8 @@ const inventoryRoute = require("./routes/inventoryRoute");
 const baseController = require("./controllers/baseController");
 const invController = require("./controllers/invController");
 const bodyParser = require("body-parser");
-
+const cookieParser = require("cookie-parser");
 // const accountRoute = require("./routes/accountRoute");
-
 const utilities = require("./utilities/");
 const session = require("express-session");
 const pool = require("./database/");
@@ -52,6 +51,9 @@ app.use(function (req, res, next) {
 });
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+app.use(cookieParser());
+app.use(utilities.checkJWTToken);
+
 /* ***********************
  * Routes
  *************************/
@@ -61,8 +63,6 @@ app.get("/", utilities.handleErrors(baseController.buildHome));
 app.use("/inv", utilities.handleErrors(inventoryRoute));
 app.use("/detail", utilities.handleErrors(inventoryRoute));
 app.use("/account", require("./routes/accountRoute"));
-// app.use("/account", require("./routes/accountRoute"));
-// app.use("/internal-error", utilities.handleErrors(inventoryRoute));
 app.use("/internal-error", invController.internalError);
 
 // File Not Found Route - must be last route in list

@@ -80,10 +80,48 @@ async function addCar(inv_car) {
     throw error;
   }
 }
+async function editCar(inv_car) {
+  try {
+    const result = await pool.query(
+      `UPDATE public.inventory 
+        SET 
+        inv_make = $1
+        ,inv_model = $2
+        ,inv_year = $3
+        ,inv_description = $4
+        ,inv_image = $5
+        ,inv_thumbnail = $6
+        ,inv_price = $7
+        ,inv_miles = $8
+        ,inv_color = $9
+        ,classification_id = $10
+        WHERE inv_id = $11
+        RETURNING *`,
+      [
+        inv_car.inv_make,
+        inv_car.inv_model,
+        inv_car.inv_year,
+        inv_car.inv_description,
+        inv_car.inv_image,
+        inv_car.inv_thumbnail,
+        inv_car.inv_price,
+        inv_car.inv_miles,
+        inv_car.inv_color,
+        inv_car.classification_id,
+        inv_car.inv_id,
+      ]
+    );
+    return result.rows[0];
+  } catch (error) {
+    console.error("model error: " + error);
+    throw error;
+  }
+}
 module.exports = {
   getClassifications,
   getInventoryByClassificationId,
   getInventoryItemByInventoryId,
   addClassification,
   addCar,
+  editCar,
 };

@@ -9,7 +9,7 @@
 </ul>
 <% } %>
 
-<form action="/inv/add-car" method="post">
+<form id="updateForm" action="/inv/update/" method="post">
   <label for="classification_id">Classification</label>
   <%- classificationSelect %>
   <label for="inv_make">Make</label>
@@ -17,7 +17,9 @@
     type="text"
     id="inv_make"
     name="inv_make"
-    value="<%= locals.inv_make %>"
+    minlength="3"
+    placeholder="Min of 3 characters"
+    value="<%= locals.inv_make ? locals.inv_make : inv_make %>"
     required
   />
   <label for="inv_model">Model</label>
@@ -25,7 +27,7 @@
     type="text"
     id="inv_model"
     name="inv_model"
-    value="<%= locals.inv_model %>"
+    value="<%= locals.inv_model ? locals.inv_model : inv_model %>"
     required
   />
   <label for="inv_year">Year</label>
@@ -33,12 +35,12 @@
     type="number"
     id="inv_year"
     name="inv_year"
-    value="<%= locals.inv_year %>"
+    value="<%= locals.inv_year ? locals.inv_year : inv_year %>"
     required
   />
   <label for="inv_description">Description</label>
   <textarea id="inv_description" name="inv_description" required>
-<%= locals.inv_description %>
+<%= locals.inv_description ? locals.inv_description : inv_description %>
   </textarea>
 
   <label for="inv_image">Image</label>
@@ -46,7 +48,7 @@
     type="text"
     id="inv_image"
     name="inv_image"
-    value="<%= locals.inv_image ? locals.inv_image : '/images/vehicles/no-image.png'%>"
+    value="<%= locals.inv_image ? locals.inv_image : inv_image%>"
     required
   />
   <label for="inv_thumbnail">Thumbnail</label>
@@ -54,7 +56,7 @@
     type="text"
     id="inv_thumbnail"
     name="inv_thumbnail"
-    value="<%= locals.inv_thumbnail ? locals.inv_thumbnail : '/images/vehicles/no-image.png'%>"
+    value="<%= locals.inv_thumbnail ? locals.inv_thumbnail : inv_thumbnail%>"
     required
   />
   <label for="inv_price">Price</label>
@@ -62,7 +64,7 @@
     type="number"
     id="inv_price"
     name="inv_price"
-    value="<%= locals.inv_price %>"
+    value="<%= locals.inv_price ? locals.inv_price : inv_price %>"
     required
   />
   <label for="inv_miles">Miles</label>
@@ -70,7 +72,7 @@
     type="number"
     id="inv_miles"
     name="inv_miles"
-    value="<%= locals.inv_miles %>"
+    value="<%= locals.inv_miles ? locals.inv_miles : inv_miles %>"
     required
   />
   <label for="inv_color">Color</label>
@@ -78,9 +80,15 @@
     type="text"
     id="inv_color"
     name="inv_color"
-    value="<%= locals.inv_color %>"
+    value="<%= locals.inv_color ? locals.inv_color : inv_color %>"
     required
   />
-
-  <button>Add</button>
+  <input
+    type="hidden"
+    name="inv_id"
+    value="<%= locals.inv_id ? locals.inv_id : inv_id %>"
+  />
+  <button disabled>Update</button>
 </form>
+
+<script src="/js/inv-update.js"></script>

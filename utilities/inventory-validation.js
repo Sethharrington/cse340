@@ -54,7 +54,7 @@ validate.carRules = () => {
       .withMessage("Please select a classification."), // on error this message is sent.
 
     // Make is required and must be string
-    body("inventory_make")
+    body("inv_make")
       .trim()
       .escape()
       .notEmpty()
@@ -62,7 +62,7 @@ validate.carRules = () => {
       .withMessage("Please provide a make."), // on error this message is sent.
 
     // Model is required and must be string
-    body("inventory_model")
+    body("inv_model")
       .trim()
       .escape()
       .notEmpty()
@@ -70,16 +70,16 @@ validate.carRules = () => {
       .withMessage("Please provide a model."), // on error this message is sent.
 
     // Year is required and must be string
-    body("inventory_year")
+    body("inv_year")
       .trim()
-      .isDate({ format: "YYYY" }) // YYYY format for year
-      .escape()
       .notEmpty()
-      //   .isLength({ min: 4, max: 4 })
+      .escape()
+      .isNumeric()
+      .isLength({ min: 4, max: 4 })
       .withMessage("Please provide a valid year."), // on error this message is sent.
 
     // Description is required and must be string
-    body("inventory_description")
+    body("inv_description")
       .trim()
       .escape()
       .notEmpty()
@@ -87,37 +87,34 @@ validate.carRules = () => {
       .withMessage("Please provide a description."), // on error this message is sent.
 
     // Image URL is required and must be valid URL
-    body("inventory_image")
+    body("inv_image")
       .trim()
-      .escape()
       .notEmpty()
-      .isURL()
+      .isString()
       .withMessage("Please provide a valid image URL."), // on error this message is sent.
 
     // Thumbnail URL is required and must be valid URL
-    body("inventory_thumbnail")
+    body("inv_thumbnail")
       .trim()
-      .escape()
       .notEmpty()
-      .isURL()
+      .isString()
       .withMessage("Please provide a valid image URL."), // on error this message is sent.
 
     // Price is required and must be numeric
-    body("inventory_price")
+    body("inv_price")
       .trim()
-      .escape()
       .notEmpty()
       .isNumeric()
       .withMessage("Please provide a price."), // on error this message is sent.
     // Price is required and must be numeric
-    body("inventory_miles")
+    body("inv_miles")
       .trim()
       .escape()
       .notEmpty()
       .isNumeric()
       .withMessage("Please provide mileage."), // on error this message is sent.
     // Price is required and must be numeric
-    body("inventory_color")
+    body("inv_color")
       .trim()
       .escape()
       .notEmpty()
@@ -144,11 +141,14 @@ validate.checkCarData = async (req, res, next) => {
   errors = validationResult(req);
   if (!errors.isEmpty()) {
     let nav = await utilities.getNav();
-    let classifications = await invModel.getClassifications();
+    const classificationSelect = await utilities.buildClassificationList(
+      classification_id
+    );
+
     res.render("./inventory/add-car", {
       title: "New Car",
       nav,
-      classifications: classifications.rows,
+      classificationSelect,
       errors,
       classification_id,
       inv_make,
@@ -160,6 +160,50 @@ validate.checkCarData = async (req, res, next) => {
       inv_price,
       inv_miles,
       inv_color,
+    });
+    return;
+  }
+  next();
+};
+validate.checkUpdateData = async (req, res, next) => {
+  const {
+    inv_id,
+    classification_id,
+    inv_make,
+    inv_model,
+    inv_year,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_miles,
+    inv_color,
+  } = req.body;
+
+  let errors = [];
+  errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav();
+    const itemName = `${inv_make} ${inv_model}`;
+    const classificationSelect = await utilities.buildClassificationList(
+      classification_id
+    );
+    res.render("./inventory/edit-car", {
+      title: "Edit " + itemName,
+      nav,
+      classificationSelect: classificationSelect,
+      errors,
+      inv_id,
+      inv_make,
+      inv_model,
+      inv_year,
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_price,
+      inv_miles,
+      inv_color,
+      classification_id,
     });
     return;
   }
