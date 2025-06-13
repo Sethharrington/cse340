@@ -26,6 +26,23 @@ Util.getNav = async function (req, res, next) {
   return list;
 };
 
+Util.getAccountManageView = async function (req, res, next) {
+  const accountData = res.locals.accountData;
+  let pageContent = "";
+  if (!accountData) {
+    req.flash("notice", "Please log in to manage your account.");
+    return res.redirect("/account/login");
+  } else {
+    pageContent = `<h2> Welcome ${accountData.account_firstname}</h2>`;
+  }
+
+  if (["Admin", "Employee"].includes(accountData.account_type)) {
+    pageContent += `<h3>Inventory Management</h3>
+    <p> <a href="/inv/">Inventory Management</a> </p>
+    `;
+  }
+  return pageContent;
+};
 /* **************************************
  * Build the classification view HTML
  * ************************************ */
@@ -146,6 +163,30 @@ Util.checkLogin = (req, res, next) => {
     req.flash("notice", "Please log in.");
     return res.redirect("/account/login");
   }
+};
+Util.checkAuthorization = (allowedRoles = []) => {
+  return (req, res, next) => {
+    const userType = res.locals.accountData?.account_type;
+    if (userType && allowedRoles.includes(userType)) {
+      next();
+    } else {
+      req.flash("notice", "You are not authorized to view this page");
+      return res.redirect("/");
+    }
+  };
+};
+Util.checkLoginLogout = (req, res, next) => {
+  const isLoggedIn = req.session.loggedIn || false;
+  if (isLoggedIn) {
+    req.flash("notice", "Welcome back!");
+  } else {
+    req.flash("notice", "Welcome to our site! Please log in or register.");
+  }
+  let logLink = res.locals.loggedin
+    ? '<a title="Click to log in" href="/account/login">My Account</a>'
+    : '<a title="Click to log out" href="/account/logout">Logout</a>';
+  // document.getElementById("tools").innerHTML = logLink;
+  next();
 };
 
 Util.buildClassificationList = async function (classification_id = null) {

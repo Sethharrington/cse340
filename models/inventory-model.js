@@ -117,6 +117,19 @@ async function editCar(inv_car) {
     throw error;
   }
 }
+
+async function deleteInventoryItemById(inv_id) {
+  try {
+    const result = await pool.query(
+      "DELETE FROM public.inventory WHERE inv_id = $1 RETURNING *",
+      [inv_id]
+    );
+    return result;
+  } catch (error) {
+    console.error("delete error: " + error);
+    throw error;
+  }
+}
 module.exports = {
   getClassifications,
   getInventoryByClassificationId,
@@ -124,4 +137,5 @@ module.exports = {
   addClassification,
   addCar,
   editCar,
+  deleteInventoryItemById,
 };

@@ -28,10 +28,8 @@ validate.checkClassificationData = async (req, res, next) => {
   let errors = [];
   errors = validationResult(req);
   if (!errors.isEmpty()) {
-    let nav = await utilities.getNav();
     res.render("./inventory/add-classification", {
       title: "New Classification",
-      nav,
       errors,
       classification_name,
     });
@@ -140,14 +138,12 @@ validate.checkCarData = async (req, res, next) => {
   let errors = [];
   errors = validationResult(req);
   if (!errors.isEmpty()) {
-    let nav = await utilities.getNav();
     const classificationSelect = await utilities.buildClassificationList(
       classification_id
     );
 
     res.render("./inventory/add-car", {
       title: "New Car",
-      nav,
       classificationSelect,
       errors,
       classification_id,
@@ -183,14 +179,12 @@ validate.checkUpdateData = async (req, res, next) => {
   let errors = [];
   errors = validationResult(req);
   if (!errors.isEmpty()) {
-    let nav = await utilities.getNav();
     const itemName = `${inv_make} ${inv_model}`;
     const classificationSelect = await utilities.buildClassificationList(
       classification_id
     );
     res.render("./inventory/edit-car", {
       title: "Edit " + itemName,
-      nav,
       classificationSelect: classificationSelect,
       errors,
       inv_id,

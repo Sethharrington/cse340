@@ -15,17 +15,43 @@ router.get(
   "/register",
   utilities.handleErrors(accountController.buildRegister)
 );
+router.get(
+  "/logout",
+  // utilities.checkLogin,
+  utilities.handleErrors(accountController.logout)
+);
+router.get(
+  "/update/:accountId",
+  utilities.handleErrors(accountController.buildUpdate)
+);
 
 router.get(
   "/",
   utilities.checkLogin,
   utilities.handleErrors(accountController.loggedInAccountView)
 );
+router.get(
+  "/manage",
+  utilities.checkLogin,
+  utilities.handleErrors(accountController.manageAccountView)
+);
 router.post(
   "/register",
-  regValidate.registationRules(),
+  regValidate.registrationRules(),
   regValidate.checkRegData,
   utilities.handleErrors(accountController.registerAccount)
+);
+router.post(
+  "/update",
+  regValidate.updateRules(),
+  regValidate.checkUpdateData,
+  utilities.handleErrors(accountController.updateAccount)
+);
+router.post(
+  "/updatePassword",
+  regValidate.updatePasswordRules(),
+  regValidate.checkUpdatePasswordData,
+  utilities.handleErrors(accountController.updateAccountPassword)
 );
 
 // Process the login attempt

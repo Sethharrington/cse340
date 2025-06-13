@@ -2,7 +2,8 @@
 
 // Get a list of items in inventory based on the classification_id
 let classificationList = document.querySelector("#classificationList");
-classificationList.addEventListener("change", function () {
+
+function classificationChangeHandler() {
   let classification_id = classificationList.value;
   console.log(`classification_id is: ${classification_id}`);
   let classIdURL = "/inv/getInventory/" + classification_id;
@@ -20,7 +21,9 @@ classificationList.addEventListener("change", function () {
     .catch(function (error) {
       console.log("There was a problem: ", error.message);
     });
-});
+}
+classificationList.addEventListener("change", classificationChangeHandler);
+classificationList.addEventListener("onload", classificationChangeHandler);
 
 // Build inventory items into HTML table components and inject into DOM
 function buildInventoryList(data) {
