@@ -12,6 +12,7 @@
   <label for="account_email">Email: </label>
   <input
     type="email"
+    id="account_email"
     name="account_email"
     placeholder="Email"
     required
@@ -19,7 +20,7 @@
   />
   <label for="account_password"> Password: </label>
   <input
-    id="passwordInput"
+    id="account_password"
     type="password"
     name="account_password"
     placeholder="Password"
@@ -34,19 +35,4 @@
   <button type="submit">Login</button>
   <a href="/account/register">Register</a>
 </form>
-<script>
-  // Show password toggle
-  const passwordInput = document.querySelector("#passwordInput");
-  const showPasswordSpan = document.querySelector("#showPasswordSpan");
-
-  showPasswordSpan.addEventListener("click", () => {
-    if (passwordInput.type === "password") {
-      passwordInput.type = "text";
-      showPasswordSpan.textContent = "Hide password";
-    } else {
-      passwordInput.type = "password";
-      showPasswordSpan.textContent = "Show password";
-    }
-  });
-</script>
-<!-- Add a link to the registration page -->
+<script src="/js/show-password.js"></script>

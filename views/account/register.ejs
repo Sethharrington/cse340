@@ -51,19 +51,6 @@
   <button type="submit">Register</button>
 </form>
 
-<script>
-  // Show password toggle
-  const passwordInput = document.querySelector("#passwordInput");
-  const showPasswordSpan = document.querySelector("#showPasswordSpan");
+<script src="/js/show-password.js"></script>
 
-  showPasswordSpan.addEventListener("click", () => {
-    if (passwordInput.type === "password") {
-      passwordInput.type = "text";
-      showPasswordSpan.textContent = "Hide password";
-    } else {
-      passwordInput.type = "password";
-      showPasswordSpan.textContent = "Show password";
-    }
-  });
-</script>
 <!--%- messages() %> -->
