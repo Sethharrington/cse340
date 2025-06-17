@@ -1,13 +1,13 @@
 // Show password toggle
-const passwordInput = document.querySelector("#account_password");
+const account_password = document.querySelector("#account_password");
 const showPasswordSpan = document.querySelector("#showPasswordSpan");
 
 showPasswordSpan.addEventListener("click", () => {
-  if (passwordInput.type === "password") {
-    passwordInput.type = "text";
+  if (account_password.type === "password") {
+    account_password.type = "text";
     showPasswordSpan.textContent = "Hide password";
   } else {
-    passwordInput.type = "password";
+    account_password.type = "password";
     showPasswordSpan.textContent = "Show password";
   }
 });

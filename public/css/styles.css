@@ -331,7 +331,6 @@ input:required:valid {
   transition: 0.5s;
 }
 
-
 /* Forms */
 form {
   display: grid;
@@ -395,6 +394,16 @@ form textarea {
 form p {
   grid-column: 1/3;
 
+}
+
+#showPasswordSpan {
+  grid-column: 2/3;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 10px;
+  background-color: #ffffff;
+  color: var(--primary-color);
+  text-align: center;
 }
 
 /* Mobile */
