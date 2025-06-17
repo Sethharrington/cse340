@@ -15,11 +15,7 @@ router.get(
   "/register",
   utilities.handleErrors(accountController.buildRegister)
 );
-router.get(
-  "/logout",
-  // utilities.checkLogin,
-  utilities.handleErrors(accountController.logout)
-);
+router.get("/logout", utilities.handleErrors(accountController.logout));
 router.get(
   "/update/:accountId",
   utilities.handleErrors(accountController.buildUpdate)

@@ -185,7 +185,6 @@ Util.checkLoginLogout = (req, res, next) => {
   let logLink = res.locals.loggedin
     ? '<a title="Click to log in" href="/account/login">My Account</a>'
     : '<a title="Click to log out" href="/account/logout">Logout</a>';
-  // document.getElementById("tools").innerHTML = logLink;
   next();
 };
 

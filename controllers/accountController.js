@@ -113,7 +113,8 @@ async function accountLogin(req, res) {
           maxAge: 3600 * 1000,
         });
       }
-      return res.redirect("/account/");
+
+      return res.redirect("/account/manage");
     } else {
       req.flash(
         "message notice",
@@ -140,7 +141,7 @@ async function manageAccountView(req, res) {
   });
 }
 async function buildUpdate(req, res, next) {
-  const inv_id = res.locals.accountData.account_id || req.params.accountId;
+  const inv_id = res.locals.ta.account_id || req.params.accountId;
   const accountData = await accountModel.getAccountById(inv_id);
 
   res.render("account/update", {

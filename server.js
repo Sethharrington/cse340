@@ -45,20 +45,20 @@ app.use(
 
 // Express Messages Middleware
 app.use(require("connect-flash")());
-app.use(function (req, res, next) {
-  res.locals.messages = require("express-messages")(req, res);
-  res.locals.loggedin = req.session.loggedin || false;
-  next();
-});
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 app.use(cookieParser());
-app.use(utilities.checkJWTToken);
+app.use(function (req, res, next) {
+  res.locals.messages = require("express-messages")(req, res);
+  res.locals.loggedin = req.session.loggedin || false;
+
+  next();
+});
 app.use(async (req, res, next) => {
   res.locals.nav = await utilities.getNav();
   next();
 });
-// app.use(utilities.checkLoginLogout);
+app.use(utilities.checkJWTToken);
 
 /* ***********************
  * Routes
