@@ -287,6 +287,23 @@ nav ul li a {
   align-self: center;
 }
 
+.status {
+  background-color: #ffffff;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.status_available {
+  color: #75934E;
+}
+
+.status_sold {
+  color: #dc143c;
+}
+
 /* Registration and Login */
 input:required:invalid,
 input:focus:invalid {

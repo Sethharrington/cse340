@@ -86,6 +86,11 @@ Util.buildClassificationGrid = async function (data) {
         "<span>$" +
         new Intl.NumberFormat("en-US").format(vehicle.inv_price) +
         "</span>";
+      grid += `
+      <h3
+      class="status ${
+        vehicle.inv_status == "Available" ? "status_available" : "status_sold"
+      }"> ${vehicle.inv_status}</h3>`;
       grid += "</div>";
       grid += "</li>";
     });
@@ -100,9 +105,14 @@ Util.buildInventoryItemDetail = async function (car) {
   let detailView = `
   <hr/>
   <div class="details">
-    <img src="${car.inv_image}" alt="Image of ${car.inv_make} ${
+    <div>
+    <p class="status ${
+      car.inv_status == "Available" ? "status_available" : "status_sold"
+    }">${car.inv_status}</p>
+      <img src="${car.inv_image}" alt="Image of ${car.inv_make} ${
     car.inv_model
   } on CSE Motors" />
+    </div>
     <div class="details-data">
       <h2>${car.inv_make} Details</h2>
       <hr/>

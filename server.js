@@ -51,7 +51,6 @@ app.use(cookieParser());
 app.use(function (req, res, next) {
   res.locals.messages = require("express-messages")(req, res);
   res.locals.loggedin = req.session.loggedin || false;
-
   next();
 });
 app.use(async (req, res, next) => {
