@@ -81,6 +81,13 @@
     value="<%= locals.inv_color %>"
     required
   />
-
+<label for="inv_status">Status</label>
+  <select name="inv_status" id="inv_status">
+    <option value="Select" selected >Select a status</option>
+    <option value="Available" <%= locals.inv_status == "Available" ? 'selected' : '' %>>Available</option>
+    <option value="Unavailable" <%= locals.inv_status == "Unavailable" ? 'selected' : '' %>>Unavailable</option>
+    <option value="Sold" <%= locals.inv_status == "Sold" ? 'selected' : '' %>>Sold</option>
+    <option value="Pending" <%= locals.inv_status == "Pending" ? 'selected' : '' %>>Pending</option>
+  </select>
   <button>Add</button>
 </form>

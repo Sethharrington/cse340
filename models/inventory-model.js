@@ -59,8 +59,8 @@ async function addClassification(classification_name) {
 async function addCar(inv_car) {
   try {
     const result = await pool.query(
-      `INSERT INTO public.inventory (inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id)
-        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *`,
+      `INSERT INTO public.inventory (inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, inv_status, classification_id)
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *`,
       [
         inv_car.inv_make,
         inv_car.inv_model,
@@ -71,6 +71,7 @@ async function addCar(inv_car) {
         inv_car.inv_price,
         inv_car.inv_miles,
         inv_car.inv_color,
+        inv_car.inv_status,
         inv_car.classification_id,
       ]
     );
@@ -94,8 +95,9 @@ async function editCar(inv_car) {
         ,inv_price = $7
         ,inv_miles = $8
         ,inv_color = $9
-        ,classification_id = $10
-        WHERE inv_id = $11
+        ,inv_status = $10
+        ,classification_id = $11
+        WHERE inv_id = $12
         RETURNING *`,
       [
         inv_car.inv_make,
@@ -107,6 +109,7 @@ async function editCar(inv_car) {
         inv_car.inv_price,
         inv_car.inv_miles,
         inv_car.inv_color,
+        inv_car.inv_status,
         inv_car.classification_id,
         inv_car.inv_id,
       ]

@@ -118,6 +118,12 @@ validate.carRules = () => {
       .notEmpty()
       .isLength({ min: 1 })
       .withMessage("Please provide a Color."), // on error this message is sent.
+    body("inv_status")
+      .trim()
+      .escape()
+      .notEmpty()
+      .isIn(["Available", "Sold", "Pending", "Unavailable"])
+      .withMessage("Please provide a valid status."), // on error this message is sent
   ];
 };
 
@@ -133,6 +139,7 @@ validate.checkCarData = async (req, res, next) => {
     inv_price,
     inv_miles,
     inv_color,
+    inv_status,
   } = req.body;
 
   let errors = [];
@@ -156,6 +163,7 @@ validate.checkCarData = async (req, res, next) => {
       inv_price,
       inv_miles,
       inv_color,
+      inv_status,
     });
     return;
   }
@@ -174,6 +182,7 @@ validate.checkUpdateData = async (req, res, next) => {
     inv_price,
     inv_miles,
     inv_color,
+    inv_status,
   } = req.body;
 
   let errors = [];
@@ -197,6 +206,7 @@ validate.checkUpdateData = async (req, res, next) => {
       inv_price,
       inv_miles,
       inv_color,
+      inv_status,
       classification_id,
     });
     return;

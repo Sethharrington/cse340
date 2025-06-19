@@ -90,6 +90,7 @@ invCont.editInventoryView = async function (req, res, next) {
     inv_price: itemData.inv_price,
     inv_miles: itemData.inv_miles,
     inv_color: itemData.inv_color,
+    inv_status: itemData.inv_status,
     classification_id: itemData.classification_id,
   });
 };
@@ -137,6 +138,7 @@ invCont.addCar = async function (req, res) {
     inv_price,
     inv_miles,
     inv_color,
+    inv_status,
     classification_id,
   } = req.body;
   const inv_car = {
@@ -149,6 +151,7 @@ invCont.addCar = async function (req, res) {
     inv_price,
     inv_miles,
     inv_color,
+    inv_status,
     classification_id,
   };
   const addCarResult = await invModel.addCar(inv_car);
@@ -190,6 +193,7 @@ invCont.editCar = async function (req, res) {
     inv_price,
     inv_miles,
     inv_color,
+    inv_status,
     classification_id,
     inv_id,
   } = req.body;
@@ -203,6 +207,7 @@ invCont.editCar = async function (req, res) {
     inv_price,
     inv_miles,
     inv_color,
+    inv_status,
     classification_id,
     inv_id,
   };
@@ -235,6 +240,7 @@ invCont.editCar = async function (req, res) {
       inv_price,
       inv_miles,
       inv_color,
+      inv_status,
       classification_id,
     });
   }
