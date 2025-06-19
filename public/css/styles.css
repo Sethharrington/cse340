@@ -318,6 +318,41 @@ input:required:valid {
   background-repeat: no-repeat;
 }
 
+/* Inventory Display */
+#inventoryDisplay {
+  width: 100%;
+  height: auto;
+  border-collapse: collapse;
+  margin: 20px auto;
+  border: 1px solid var(--secondary-color);
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#inventoryDisplay thead {
+  background-color: var(--primary-color);
+  color: #ffffff;
+}
+
+#inventoryDisplay th,
+#inventoryDisplay td {
+  padding: 10px;
+  text-align: center;
+  border: 1px solid var(--secondary-color);
+}
+
+.edit-car-btn {
+  text-decoration: none;
+  color: #75934E;
+  font-weight: bold;
+}
+
+.delete-car-btn {
+  text-decoration: none;
+  color: #dc143c;
+  font-weight: bold;
+}
+
 /* Add Links */
 .add-menu {
   list-style: none;
